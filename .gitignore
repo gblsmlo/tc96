@@ -1,4 +1,5 @@
 node_modules
+.DS_Store
 dist
 .source
 packages/tc96/registry/generated
