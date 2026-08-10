@@ -13,6 +13,9 @@ import { cn } from 'tc96/utils'
 `ui` contains primitives, `components` contains reusable compositions, `blocks`
 contains complete application sections, and `utils` contains framework-agnostic helpers.
 
+See the validated [`StatusPill` example](./examples/utils/status-pill.tsx) for a
+small composition using `cn` from `tc96/utils`.
+
 See the documentation app for installation and COSS registry guidance.
 
 For COSS source installation, add the one group you own:

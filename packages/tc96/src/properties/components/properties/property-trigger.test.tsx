@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test } from 'bun:test'
 
-await import('@/test/dom')
+await import('../../test/dom')
 
 const { cleanup, render, screen } = await import('@testing-library/react')
 const { DateProperty } = await import('./date/date-property')

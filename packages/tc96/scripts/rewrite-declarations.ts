@@ -5,10 +5,6 @@ const dist = join(import.meta.dir, '../dist')
 const internal = join(dist, 'internal')
 
 const publicModules = {
-  ui: [
-    "export { Button, buttonVariants } from '../internal/view/components/ui/button'",
-    "export { Input, InputPrimitive } from '../internal/properties/components/ui/input'",
-  ],
   components: [
     "export * from '../internal/properties/index'",
     "export * from '../internal/editable/index'",
@@ -20,7 +16,6 @@ const publicModules = {
     "export * from '../internal/detail-sheet/index'",
     "export * from '../internal/filter-builder/index'",
   ],
-  utils: ["export { cn } from '../internal/view/lib/utils'"],
 } as const
 
 async function rewrite(directory: string, groupRoot: string): Promise<void> {

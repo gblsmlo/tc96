@@ -22,11 +22,11 @@ interface PackageManifest {
   version?: string
 }
 
-const manifest = JSON.parse(readFileSync('registry.json', 'utf8')) as {
+const manifest = JSON.parse(readFileSync('registry/view.json', 'utf8')) as {
   items: RegistryItem[]
 }
-const distributedItem = JSON.parse(
-  readFileSync('registry/collection-views.json', 'utf8'),
+const generatedItem = JSON.parse(
+  readFileSync('registry/generated/view.json', 'utf8'),
 ) as RegistryItem
 const manifestItem = manifest.items.find((item) => item.name === 'collection-views')
 const packageManifest = JSON.parse(readFileSync('package.json', 'utf8')) as PackageManifest
@@ -40,14 +40,14 @@ function findSourceFiles(directory: string): string[] {
 
 describe('Collection views registry', () => {
   test('publishes the collection views package and registry entry', () => {
-    expect(packageManifest.name).toBe('@tc96/collection-views')
-    expect(packageManifest.version).toBe('0.4.0')
+    expect(packageManifest.name).toBe('tc96')
+    expect(packageManifest.version).toBe('0.1.0')
     expect(manifestItem?.name).toBe('collection-views')
-    expect(distributedItem.name).toBe('collection-views')
-    expect(packageManifest.exports?.['./registry']).toBe('./registry/collection-views.json')
+    expect(generatedItem?.name).toBe('collection-views')
+    expect(packageManifest.exports?.['./registry/view']).toBe('./registry/generated/view.json')
     expect(packageManifest.exports?.['./registry/kanban.json']).toBeUndefined()
     expect(
-      distributedItem.files.every((file) => !file.target?.includes('/patterns/kanban')),
+      generatedItem?.files.every((file) => !file.target?.includes('/patterns/kanban')),
     ).toBeTrue()
   })
 
@@ -66,9 +66,9 @@ describe('Collection views registry', () => {
     ]
 
     expect(manifestItem?.registryDependencies?.toSorted()).toEqual(expectedDependencies)
-    expect(distributedItem.registryDependencies?.toSorted()).toEqual(expectedDependencies)
+    expect(generatedItem?.registryDependencies?.toSorted()).toEqual(expectedDependencies)
     expect(manifestItem?.dependencies).toContain('lucide-react@1.28.0')
-    expect(distributedItem.dependencies).toContain('lucide-react@1.28.0')
+    expect(generatedItem?.dependencies).toContain('lucide-react@1.28.0')
   })
 
   test('keeps COSS primitives out of the collection views pattern payload', () => {
@@ -85,29 +85,29 @@ describe('Collection views registry', () => {
 
     for (const path of copiedPrimitivePaths) {
       expect(manifestItem?.files.some((file) => file.path === path)).toBeFalse()
-      expect(distributedItem.files.some((file) => file.path === path)).toBeFalse()
+      expect(generatedItem?.files.some((file) => file.path === `src/view/${path.slice(4)}`)).toBeFalse()
     }
-    expect(distributedItem.dependencies ?? []).not.toContain('@base-ui/react@1.6.0')
+    expect(generatedItem?.dependencies ?? []).not.toContain('@base-ui/react@1.6.0')
   })
 
   test('imports UI through the consumer COSS alias', () => {
-    const badge = distributedItem.files.find(
-      (file) => file.path === 'src/kanban/components/kanban-badge.tsx',
+    const badge = generatedItem.files.find(
+      (file) => file.path === 'src/view/kanban/components/kanban-badge.tsx',
     )
-    const card = distributedItem.files.find(
-      (file) => file.path === 'src/kanban/components/kanban-card.tsx',
+    const card = generatedItem.files.find(
+      (file) => file.path === 'src/view/kanban/components/kanban-card.tsx',
     )
-    const cardSkeleton = distributedItem.files.find(
-      (file) => file.path === 'src/kanban/components/kanban-card-skeleton.tsx',
+    const cardSkeleton = generatedItem.files.find(
+      (file) => file.path === 'src/view/kanban/components/kanban-card-skeleton.tsx',
     )
-    const column = distributedItem.files.find(
-      (file) => file.path === 'src/kanban/components/kanban-column.tsx',
+    const column = generatedItem.files.find(
+      (file) => file.path === 'src/view/kanban/components/kanban-column.tsx',
     )
-    const stageSelector = distributedItem.files.find(
-      (file) => file.path === 'src/kanban/components/kanban-stage-selector.tsx',
+    const stageSelector = generatedItem.files.find(
+      (file) => file.path === 'src/view/kanban/components/kanban-stage-selector.tsx',
     )
-    const view = distributedItem.files.find(
-      (file) => file.path === 'src/kanban/components/kanban-view.tsx',
+    const view = generatedItem.files.find(
+      (file) => file.path === 'src/view/kanban/components/kanban-view.tsx',
     )
 
     expect(badge?.content).toContain("from '@/components/ui/badge'")
@@ -120,15 +120,15 @@ describe('Collection views registry', () => {
     expect(stageSelector?.content).toContain("from '@/components/ui/scroll-area'")
     expect(view?.content).toContain("from '@/components/ui/scroll-area'")
 
-    for (const file of distributedItem.files) {
+    for (const file of generatedItem.files) {
       expect(file.content ?? '').not.toContain("from '@base-ui/react")
     }
   })
 
   test('ships the Kanban-owned card composition API', () => {
-    const publicApi = distributedItem.files.find((file) => file.path === 'src/kanban/index.ts')
-    const card = distributedItem.files.find(
-      (file) => file.path === 'src/kanban/components/kanban-card.tsx',
+    const publicApi = generatedItem.files.find((file) => file.path === 'src/view/kanban/index.ts')
+    const card = generatedItem.files.find(
+      (file) => file.path === 'src/view/kanban/components/kanban-card.tsx',
     )
     const componentNames = [
       'KanbanCardAction',
@@ -150,29 +150,29 @@ describe('Collection views registry', () => {
   })
 
   test('ships collection and List APIs through the same registry item', () => {
-    const publicApi = distributedItem.files.find((file) => file.path === 'src/index.ts')
-    const collectionApi = distributedItem.files.find(
-      (file) => file.path === 'src/collection/index.ts',
+    const publicApi = generatedItem.files.find((file) => file.path === 'src/view/index.ts')
+    const collectionApi = generatedItem.files.find(
+      (file) => file.path === 'src/view/collection/index.ts',
     )
-    const collectionSettings = distributedItem.files.find(
-      (file) => file.path === 'src/collection/components/collection-settings-menu.tsx',
+    const collectionSettings = generatedItem.files.find(
+      (file) => file.path === 'src/view/collection/components/collection-settings-menu.tsx',
     )
-    const collectionViewOutlet = distributedItem.files.find(
-      (file) => file.path === 'src/collection/components/collection-view-outlet.tsx',
+    const collectionViewOutlet = generatedItem.files.find(
+      (file) => file.path === 'src/view/collection/components/collection-view-outlet.tsx',
     )
-    const listApi = distributedItem.files.find((file) => file.path === 'src/list/index.ts')
-    const listView = distributedItem.files.find(
-      (file) => file.path === 'src/list/components/list-view.tsx',
+    const listApi = generatedItem.files.find((file) => file.path === 'src/view/list/index.ts')
+    const listView = generatedItem.files.find(
+      (file) => file.path === 'src/view/list/components/list-view.tsx',
     )
-    const listGroup = distributedItem.files.find(
-      (file) => file.path === 'src/list/components/list-group.tsx',
+    const listGroup = generatedItem.files.find(
+      (file) => file.path === 'src/view/list/components/list-group.tsx',
     )
-    const listItem = distributedItem.files.find(
-      (file) => file.path === 'src/list/components/list-item.tsx',
+    const listItem = generatedItem.files.find(
+      (file) => file.path === 'src/view/list/components/list-item.tsx',
     )
 
-    expect(publicApi?.content).toContain("export * from './collection'")
-    expect(publicApi?.content).toContain("export * from './list'")
+    expect(publicApi?.content).toContain("export * from './collection/index'")
+    expect(publicApi?.content).toContain("export * from './list/index'")
     expect(collectionApi?.content).toContain('CollectionProvider')
     expect(collectionApi?.content).toContain('CollectionSettingsMenu')
     expect(collectionApi?.content).toContain('CollectionViewOutlet')
@@ -200,7 +200,7 @@ describe('Collection views registry', () => {
   })
 
   test('keeps direct Base UI imports inside the COSS ui source boundary', () => {
-    const patternSources = ['src/collection', 'src/kanban', 'src/list'].flatMap((directory) =>
+    const patternSources = ['src/view/collection', 'src/view/kanban', 'src/view/list'].flatMap((directory) =>
       findSourceFiles(directory).filter(
         (path) => /\.[jt]sx?$/.test(path) && !path.includes('.test.'),
       ),
@@ -220,12 +220,12 @@ describe('Collection views registry', () => {
       '@dnd-kit/react',
     ]
     const packageDependencies = packageManifest.dependencies ?? {}
-    const registryDependencies = distributedItem.dependencies ?? []
-    const source = findSourceFiles('src/kanban')
+    const registryDependencies = generatedItem.dependencies ?? []
+    const source = findSourceFiles('src/view/kanban')
       .filter((path) => /\.[jt]sx?$/.test(path) && !path.includes('.test.'))
       .map((path) => readFileSync(path, 'utf8'))
       .join('\n')
-    const distributedSource = distributedItem.files.map((file) => file.content ?? '').join('\n')
+    const distributedSource = generatedItem.files.map((file) => file.content ?? '').join('\n')
 
     for (const packageName of currentPackages) {
       expect(packageDependencies[packageName]).toBe('0.5.0')

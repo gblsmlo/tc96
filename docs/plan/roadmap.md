@@ -14,7 +14,8 @@
 - [x] Definir o monorepo com uma única unidade de publicação.
 - [x] Registrar as regras entre `ui`, `components`, `blocks` e `utils`.
 - [x] Criar guardas de workspaces, subpaths e registry.
-- [ ] Tornar o registry capaz de resolver dependências compartilhadas.
+- [x] Tornar o registry capaz de resolver dependências compartilhadas e publicar
+  payloads autocontidos.
 - [ ] Migrar os grupos históricos para as quatro camadas canônicas.
 
 ## 3. Sistema base

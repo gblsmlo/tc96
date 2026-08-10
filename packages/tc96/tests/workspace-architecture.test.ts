@@ -54,3 +54,46 @@ test('keeps a generated COSS entry for every historical source group', async () 
     expect(await Bun.file(join(generated, `${group}.json`)).exists()).toBe(true)
   }
 })
+
+test('builds tc96/utils from the canonical source instead of a historical group', async () => {
+  const canonicalUtils = await Bun.file(join(packageRoot, 'src/utils/index.ts')).text()
+  const buildPackage = await Bun.file(join(packageRoot, 'scripts/build-package.ts')).text()
+  const rewriteDeclarations = await Bun.file(
+    join(packageRoot, 'scripts/rewrite-declarations.ts'),
+  ).text()
+
+  expect(canonicalUtils).toContain('export function cn')
+  expect(buildPackage).toContain("join(root, 'src/utils/index.ts')")
+  expect(buildPackage).not.toContain("utils: [\"export { cn } from '../internal/view")
+  expect(rewriteDeclarations).not.toContain("utils: [\"export { cn } from '../internal/view")
+})
+
+test('builds tc96/ui from canonical primitives', async () => {
+  const canonicalUi = await Bun.file(join(packageRoot, 'src/ui/index.ts')).text()
+  const buildPackage = await Bun.file(join(packageRoot, 'scripts/build-package.ts')).text()
+
+  expect(canonicalUi).toContain("from './button'")
+  expect(canonicalUi).toContain("from './input'")
+  expect(buildPackage).toContain("join(root, 'src/ui/button.tsx')")
+  expect(buildPackage).not.toContain("ui: [\"export { Button, buttonVariants } from '../internal/view")
+})
+
+test('keeps Storybook as a consumer of public tc96 subpaths', async () => {
+  const storybookRoot = join(workspaceRoot, 'apps/storybook')
+  const manifest = await readManifest(join(storybookRoot, 'package.json'))
+  const allowedImports = new Set(['tc96/ui', 'tc96/components', 'tc96/blocks', 'tc96/utils'])
+  const sourceGlob = new Bun.Glob('**/*.{ts,tsx}')
+
+  expect(manifest.private).toBe(true)
+
+  for await (const sourcePath of sourceGlob.scan({ cwd: join(storybookRoot, 'src') })) {
+    const source = await Bun.file(join(storybookRoot, 'src', sourcePath)).text()
+    const tc96Imports = source.matchAll(/from ["'](tc96(?:\/[^"']*)?)["']/g)
+
+    expect(source).not.toContain('packages/tc96/src')
+
+    for (const match of tc96Imports) {
+      expect(allowedImports.has(match[1])).toBe(true)
+    }
+  }
+})

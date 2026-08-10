@@ -12,7 +12,7 @@
   "packageManager": "bun@1.3.14",
   "license": "MIT",
   "sideEffects": false,
-  "files": ["dist", "registry", "README.md", "LICENSE"],
+  "files": ["dist", "registry", "examples", "README.md", "LICENSE"],
   "exports": {
     "./ui": { "types": "./dist/ui/index.d.ts", "import": "./dist/ui/index.js" },
     "./components": { "types": "./dist/components/index.d.ts", "import": "./dist/components/index.js" },
@@ -26,12 +26,13 @@
     "./registry/filter-builder": "./registry/generated/filter-builder.json"
   },
   "scripts": {
-    "build": "bun scripts/build-registry.ts && bun scripts/build-package.ts && tsc -p tsconfig.view.json && tsc -p tsconfig.properties.json && tsc -p tsconfig.datagrid.json && tsc -p tsconfig.detail-sheet.json && tsc -p tsconfig.editable.json && tsc -p tsconfig.filter-builder.json && bun scripts/rewrite-declarations.ts",
+    "build": "bun scripts/build-registry.ts && bun scripts/build-package.ts && tsc -p tsconfig.view.json && tsc -p tsconfig.properties.json && tsc -p tsconfig.datagrid.json && tsc -p tsconfig.detail-sheet.json && tsc -p tsconfig.editable.json && tsc -p tsconfig.filter-builder.json && tsc -p tsconfig.utils.json && tsc -p tsconfig.ui.json && bun scripts/rewrite-declarations.ts",
     "lint:ci": "biome ci tests scripts",
     "pack:check": "npm pack --dry-run --json --cache /private/tmp/tc96-npm-cache",
     "verify:public-api": "bun test ./scripts/verify-public-api.ts",
-    "test": "bun scripts/build-registry.ts && bun test tests src/view/kanban/lib/drag-and-drop.test.ts",
-    "typecheck": "tsc -p tsconfig.view.json --noEmit && tsc -p tsconfig.properties.json --noEmit && tsc -p tsconfig.datagrid.json --noEmit && tsc -p tsconfig.detail-sheet.json --noEmit && tsc -p tsconfig.editable.json --noEmit && tsc -p tsconfig.filter-builder.json --noEmit",
+    "test": "bun scripts/build-registry.ts && bun scripts/test.ts",
+    "test:consumer": "bun run build && bun scripts/test-consumer.ts",
+    "typecheck": "tsc -p tsconfig.view.json --noEmit && tsc -p tsconfig.properties.json --noEmit && tsc -p tsconfig.datagrid.json --noEmit && tsc -p tsconfig.detail-sheet.json --noEmit && tsc -p tsconfig.editable.json --noEmit && tsc -p tsconfig.filter-builder.json --noEmit && tsc -p tsconfig.utils.json --noEmit && tsc -p tsconfig.ui.json --noEmit",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {

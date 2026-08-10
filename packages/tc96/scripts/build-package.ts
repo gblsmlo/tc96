@@ -6,8 +6,9 @@ const root = import.meta.dir + '/..'
 
 const publicModules = {
   ui: [
-    "export { Button, buttonVariants } from '../internal/view/components/ui/button.js'",
-    "export { Input, InputPrimitive } from '../internal/properties/components/ui/input.js'",
+    "export { Button, buttonVariants } from './button.js'",
+    "export { Input, InputPrimitive } from './input.js'",
+    "export { Spinner } from './spinner.js'",
   ],
   components: [
     "export * from '../internal/properties/index.js'",
@@ -20,7 +21,6 @@ const publicModules = {
     "export * from '../internal/detail-sheet/index.js'",
     "export * from '../internal/filter-builder/index.js'",
   ],
-  utils: ["export { cn } from '../internal/view/lib/utils.js'"],
 } as const
 
 async function resolveGroupAlias(group: (typeof groups)[number], path: string): Promise<string> {
@@ -68,6 +68,30 @@ for (const group of groups) {
     throw new Error(`Could not build tc96/${group}.`)
   }
 }
+
+const uiResult = await Bun.build({
+  entrypoints: [
+    join(root, 'src/ui/button.tsx'),
+    join(root, 'src/ui/input.tsx'),
+    join(root, 'src/ui/spinner.tsx'),
+  ],
+  format: 'esm',
+  outdir: join(root, 'dist/ui'),
+  packages: 'external',
+  target: 'browser',
+})
+
+if (!uiResult.success) throw new Error('Could not build tc96/ui.')
+
+const utilsResult = await Bun.build({
+  entrypoints: [join(root, 'src/utils/index.ts')],
+  format: 'esm',
+  outdir: join(root, 'dist/utils'),
+  packages: 'external',
+  target: 'browser',
+})
+
+if (!utilsResult.success) throw new Error('Could not build tc96/utils.')
 
 for (const [module, exports] of Object.entries(publicModules)) {
   const output = join(root, `dist/${module}`)
