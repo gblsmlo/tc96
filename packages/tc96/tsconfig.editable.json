@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.group.json",
-  "compilerOptions": { "baseUrl": "./src/editable", "rootDir": "./src/editable", "outDir": "./dist/editable", "paths": { "@/*": ["*"] } },
+  "compilerOptions": { "baseUrl": "./src/editable", "rootDir": "./src/editable", "outDir": "./dist/internal/editable", "paths": { "@/*": ["*"] } },
   "include": ["src/editable/**/*.ts", "src/editable/**/*.tsx"]
 }

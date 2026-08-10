@@ -9,11 +9,13 @@ description: Escolha imports npm ou código COSS por bloco.
 bun add tc96
 ```
 
-Importe apenas a família de que o projeto precisa:
+Importe pela camada que descreve o nível da sua composição:
 
 ```tsx
-import { KanbanView } from 'tc96/view'
-import { DataGrid } from 'tc96/datagrid'
+import { Button, Input } from 'tc96/ui'
+import { SelectProperty } from 'tc96/components'
+import { DataGrid, Kanban } from 'tc96/blocks'
+import { cn } from 'tc96/utils'
 ```
 
 ## COSS
@@ -25,5 +27,4 @@ gerado durante a publicação. Este comando instala somente o bloco de views:
 bunx shadcn@latest add ./node_modules/tc96/registry/generated/view.json
 ```
 
-Mantenha `ui` para primitives da aplicação e `patterns` para os blocos TC96.
 TC96 não altera automaticamente os componentes que o projeto não escolheu.

@@ -1,16 +1,17 @@
 # tc96
 
 `tc96` is a domain-neutral React framework for applications that use Tailwind CSS,
-COSS, Base UI, Biome, and TypeScript. It publishes deliberate subpaths so an app
-only imports the feature family it needs.
+COSS, Base UI, Biome, and TypeScript. Its public API follows the shadcn taxonomy.
 
 ```tsx
-import { KanbanView } from 'tc96/view'
-import { SelectProperty } from 'tc96/properties'
+import { Button, Input } from 'tc96/ui'
+import { SelectProperty } from 'tc96/components'
+import { Kanban } from 'tc96/blocks'
+import { cn } from 'tc96/utils'
 ```
 
-The first migration ports the existing view, properties, DataGrid, detail sheet,
-editable, and filter-builder groups without making product decisions for consumers.
+`ui` contains primitives, `components` contains reusable compositions, `blocks`
+contains complete application sections, and `utils` contains framework-agnostic helpers.
 
 See the documentation app for installation and COSS registry guidance.
 

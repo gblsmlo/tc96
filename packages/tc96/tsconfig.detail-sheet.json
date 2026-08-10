@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.group.json",
-  "compilerOptions": { "baseUrl": "./src/detail-sheet", "rootDir": "./src/detail-sheet", "outDir": "./dist/detail-sheet", "paths": { "@/*": ["*"] } },
+  "compilerOptions": { "baseUrl": "./src/detail-sheet", "rootDir": "./src/detail-sheet", "outDir": "./dist/internal/detail-sheet", "paths": { "@/*": ["*"] } },
   "include": ["src/detail-sheet/**/*.ts", "src/detail-sheet/**/*.tsx"]
 }
