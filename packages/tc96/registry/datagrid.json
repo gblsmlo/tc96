@@ -1,0 +1,130 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tc96-datagrid",
+  "homepage": "https://github.com/gblsmlo/datagrid#readme",
+  "items": [
+    {
+      "name": "datagrid",
+      "type": "registry:block",
+      "title": "DataGrid",
+      "description": "Domain-neutral DataGrid pattern for React applications.",
+      "files": [
+        {
+          "path": "src/components/badge.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/badge.tsx"
+        },
+        {
+          "path": "src/components/button.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/button.tsx"
+        },
+        {
+          "path": "src/components/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/checkbox.tsx"
+        },
+        {
+          "path": "src/components/input.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/input.tsx"
+        },
+        {
+          "path": "src/components/menu.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/menu.tsx"
+        },
+        {
+          "path": "src/components/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/pagination.tsx"
+        },
+        {
+          "path": "src/components/popover.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/popover.tsx"
+        },
+        {
+          "path": "src/components/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/scroll-area.tsx"
+        },
+        {
+          "path": "src/components/select.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/select.tsx"
+        },
+        {
+          "path": "src/components/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/skeleton.tsx"
+        },
+        {
+          "path": "src/components/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/spinner.tsx"
+        },
+        {
+          "path": "src/components/toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@patterns/datagrid/components/toolbar.tsx"
+        },
+        {
+          "path": "src/data-grid/data-grid-cells.tsx",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/data-grid-cells.tsx"
+        },
+        {
+          "path": "src/data-grid/data-grid-column-types.tsx",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/data-grid-column-types.tsx"
+        },
+        {
+          "path": "src/data-grid/data-grid-columns.tsx",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/data-grid-columns.tsx"
+        },
+        {
+          "path": "src/data-grid/data-grid-pagination.tsx",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/data-grid-pagination.tsx"
+        },
+        {
+          "path": "src/data-grid/data-grid-toolbar.tsx",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/data-grid-toolbar.tsx"
+        },
+        {
+          "path": "src/data-grid/data-grid.tsx",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/data-grid.tsx"
+        },
+        {
+          "path": "src/data-grid/index.ts",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/index.ts"
+        },
+        {
+          "path": "src/data-grid/types.ts",
+          "type": "registry:lib",
+          "target": "@patterns/datagrid/data-grid/types.ts"
+        },
+        {
+          "path": "src/data-grid/use-data-grid.tsx",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/data-grid/use-data-grid.tsx"
+        },
+        {
+          "path": "src/index.ts",
+          "type": "registry:component",
+          "target": "@patterns/datagrid/index.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@patterns/datagrid/lib/utils.ts"
+        }
+      ]
+    }
+  ]
+}

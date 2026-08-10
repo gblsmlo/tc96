@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.group.json",
+  "compilerOptions": { "baseUrl": "./src/datagrid", "rootDir": "./src/datagrid", "outDir": "./dist/datagrid", "paths": { "@/*": ["*"] } },
+  "include": ["src/datagrid/**/*.ts", "src/datagrid/**/*.tsx"]
+}

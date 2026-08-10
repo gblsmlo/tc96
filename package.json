@@ -1,0 +1,13 @@
+{
+  "name": "tc96-workspace",
+  "private": true,
+  "packageManager": "bun@1.3.14",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "build": "bun run --filter tc96 build",
+    "check": "bun run --filter tc96 lint:ci && bun run --filter tc96 typecheck && bun run --filter tc96 test && bun run --filter tc96 build && bun run --filter @tc96/docs build",
+    "release:check": "bun run check && bun --cwd=/Users/gabs/Workspaces/c/gabriel-melo/tc96/tc96/packages/tc96 run pack:check",
+    "docs:dev": "bun run --filter @tc96/docs dev",
+    "docs:build": "bun run --filter @tc96/docs build"
+  }
+}

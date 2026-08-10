@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tc96-editable",
+  "homepage": "https://github.com/gblsmlo/editable#readme",
+  "items": [
+    {
+      "name": "editable",
+      "type": "registry:ui",
+      "title": "Editable",
+      "description": "Accessible, domain-neutral inline editing primitives built with Base UI.",
+      "files": [
+        {
+          "path": "src/components/editable/editable.tsx",
+          "type": "registry:ui",
+          "target": "@components/editable/editable.tsx"
+        },
+        {
+          "path": "src/components/editable/index.ts",
+          "type": "registry:ui",
+          "target": "@components/editable/index.ts"
+        },
+        {
+          "path": "src/components/editable/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@components/editable/lib/utils.ts"
+        }
+      ],
+      "dependencies": ["@base-ui/react", "clsx", "tailwind-merge"]
+    }
+  ]
+}

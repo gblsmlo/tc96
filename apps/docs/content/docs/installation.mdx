@@ -1,0 +1,29 @@
+---
+title: Instalação
+description: Escolha imports npm ou código COSS por bloco.
+---
+
+# Instalação
+
+```sh
+bun add tc96
+```
+
+Importe apenas a família de que o projeto precisa:
+
+```tsx
+import { KanbanView } from 'tc96/view'
+import { DataGrid } from 'tc96/datagrid'
+```
+
+## COSS
+
+Para trazer o código de um bloco para o projeto consumidor, use o registry
+gerado durante a publicação. Este comando instala somente o bloco de views:
+
+```sh
+bunx shadcn@latest add ./node_modules/tc96/registry/generated/view.json
+```
+
+Mantenha `ui` para primitives da aplicação e `patterns` para os blocos TC96.
+TC96 não altera automaticamente os componentes que o projeto não escolheu.

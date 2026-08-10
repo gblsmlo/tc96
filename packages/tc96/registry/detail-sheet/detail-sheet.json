@@ -1,0 +1,56 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tc96-detail-sheet",
+  "homepage": "https://github.com/gblsmlo/details-sheet#readme",
+  "items": [
+    {
+      "name": "detail-sheet",
+      "type": "registry:block",
+      "title": "Detail Sheet",
+      "description": "Domain-neutral detail sheet pattern for React applications.",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/card",
+        "@coss/sheet",
+        "@coss/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/detail-sheet/detail-sheet.tsx",
+          "type": "registry:component",
+          "target": "@components/detail-sheet/detail-sheet.tsx"
+        },
+        {
+          "path": "src/components/detail-sheet/detail-sheet-action.tsx",
+          "type": "registry:component",
+          "target": "@components/detail-sheet/detail-sheet-action.tsx"
+        },
+        {
+          "path": "src/components/detail-sheet/detail-group.tsx",
+          "type": "registry:component",
+          "target": "@components/detail-sheet/detail-group.tsx"
+        },
+        {
+          "path": "src/components/detail-sheet/detail-row.tsx",
+          "type": "registry:component",
+          "target": "@components/detail-sheet/detail-row.tsx"
+        },
+        {
+          "path": "src/components/detail-sheet/index.ts",
+          "type": "registry:component",
+          "target": "@components/detail-sheet/index.ts"
+        },
+        {
+          "path": "src/components/detail-sheet/core.ts",
+          "type": "registry:lib",
+          "target": "@components/detail-sheet/core.ts"
+        },
+        {
+          "path": "src/components/detail-sheet/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@components/detail-sheet/lib/utils.ts"
+        }
+      ]
+    }
+  ]
+}

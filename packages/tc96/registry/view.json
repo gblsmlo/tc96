@@ -1,0 +1,184 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tc96-collection-views",
+  "homepage": "https://github.com/gblsmlo/kanban#readme",
+  "items": [
+    {
+      "name": "collection-views",
+      "type": "registry:block",
+      "title": "Collection Views",
+      "description": "Domain-neutral collection views for React applications.",
+      "author": "Gabriel Melo",
+      "dependencies": [
+        "@dnd-kit/abstract@0.5.0",
+        "@dnd-kit/collision@0.5.0",
+        "@dnd-kit/dom@0.5.0",
+        "@dnd-kit/helpers@0.5.0",
+        "@dnd-kit/react@0.5.0",
+        "class-variance-authority@0.7.1",
+        "clsx@2.1.1",
+        "lucide-react@1.28.0",
+        "tailwind-merge@3.6.0"
+      ],
+      "files": [
+        {
+          "path": "src/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/collection-views/index.ts"
+        },
+        {
+          "path": "src/collection/components/collection-provider.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/collection/components/collection-provider.tsx"
+        },
+        {
+          "path": "src/collection/components/collection-settings-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/collection/components/collection-settings-menu.tsx"
+        },
+        {
+          "path": "src/collection/components/collection-toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/collection/components/collection-toolbar.tsx"
+        },
+        {
+          "path": "src/collection/components/collection-view-outlet.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/collection/components/collection-view-outlet.tsx"
+        },
+        {
+          "path": "src/collection/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/collection-views/collection/index.ts"
+        },
+        {
+          "path": "src/collection/lib/project-collection.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/collection-views/collection/lib/project-collection.ts"
+        },
+        {
+          "path": "src/collection/types.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/collection-views/collection/types.ts"
+        },
+        {
+          "path": "src/kanban/components/kanban-badge.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/kanban/components/kanban-badge.tsx"
+        },
+        {
+          "path": "src/kanban/components/kanban-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/kanban/components/kanban-card.tsx"
+        },
+        {
+          "path": "src/kanban/components/kanban-card-skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/kanban/components/kanban-card-skeleton.tsx"
+        },
+        {
+          "path": "src/kanban/components/kanban-column.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/kanban/components/kanban-column.tsx"
+        },
+        {
+          "path": "src/kanban/components/kanban-stage-selector.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/kanban/components/kanban-stage-selector.tsx"
+        },
+        {
+          "path": "src/kanban/components/kanban-view.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/kanban/components/kanban-view.tsx"
+        },
+        {
+          "path": "src/kanban/components/sortable-kanban-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/kanban/components/sortable-kanban-card.tsx"
+        },
+        {
+          "path": "src/kanban/hooks/use-active-column-id.ts",
+          "type": "registry:hook",
+          "target": "@components/patterns/collection-views/kanban/hooks/use-active-column-id.ts"
+        },
+        {
+          "path": "src/kanban/hooks/use-horizontal-drag-scroll.ts",
+          "type": "registry:hook",
+          "target": "@components/patterns/collection-views/kanban/hooks/use-horizontal-drag-scroll.ts"
+        },
+        {
+          "path": "src/kanban/hooks/use-kanban-drag-and-drop.ts",
+          "type": "registry:hook",
+          "target": "@components/patterns/collection-views/kanban/hooks/use-kanban-drag-and-drop.ts"
+        },
+        {
+          "path": "src/kanban/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/collection-views/kanban/index.ts"
+        },
+        {
+          "path": "src/kanban/lib/drag-and-drop.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/collection-views/kanban/lib/drag-and-drop.ts"
+        },
+        {
+          "path": "src/kanban/types.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/collection-views/kanban/types.ts"
+        },
+        {
+          "path": "src/list/components/list-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/list/components/list-group.tsx"
+        },
+        {
+          "path": "src/list/components/list-item.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/list/components/list-item.tsx"
+        },
+        {
+          "path": "src/list/components/list-item-skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/list/components/list-item-skeleton.tsx"
+        },
+        {
+          "path": "src/list/components/list-view.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/collection-views/list/components/list-view.tsx"
+        },
+        {
+          "path": "src/list/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/collection-views/list/index.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/collection-views/lib/utils.ts"
+        }
+      ],
+      "registryDependencies": [
+        "@coss/badge",
+        "@coss/button",
+        "@coss/card",
+        "@coss/collapsible",
+        "@coss/empty",
+        "@coss/menu",
+        "@coss/scroll-area",
+        "@coss/skeleton",
+        "@coss/toolbar",
+        "@coss/tooltip"
+      ],
+      "meta": {
+        "package": "@tc96/collection-views",
+        "installPath": "@components/patterns/collection-views",
+        "aliases": {
+          "components": "@/components",
+          "ui": "@/components/ui",
+          "patterns": "@/components/patterns"
+        }
+      },
+      "docs": "Install the npm package first, then add this registry item with the shadcn CLI. UI primitives are installed from the official COSS registry through aliases.ui at @/components/ui."
+    }
+  ]
+}

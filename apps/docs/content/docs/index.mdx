@@ -1,0 +1,31 @@
+---
+title: TC96
+description: Blocos React reutilizáveis para aplicações COSS.
+---
+
+# TC96
+
+TC96 reúne padrões de interface que antes eram publicados separadamente. Instale
+um único pacote e importe somente o grupo usado pelo seu projeto.
+
+```tsx
+import { KanbanView } from 'tc96/view'
+```
+
+## Instalação
+
+```sh
+bun add tc96
+```
+
+O pacote requer React 19, Tailwind CSS 4 e Base UI. Para manter o código no seu
+projeto COSS, instale o bloco correspondente pelo registry do TC96.
+
+## Famílias
+
+- `tc96/view`: collection views, Kanban e List.
+- `tc96/properties`: select, pessoa, múltiplas pessoas, data e texto.
+- `tc96/datagrid`: grade acessível baseada em TanStack Table.
+- `tc96/detail-sheet`: painel de detalhe composto.
+- `tc96/editable`: edição inline acessível.
+- `tc96/filter-builder`: construtor de filtros controlado.

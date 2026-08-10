@@ -1,0 +1,6 @@
+node_modules
+dist
+.source
+packages/tc96/registry/generated
+storybook-static
+coverage

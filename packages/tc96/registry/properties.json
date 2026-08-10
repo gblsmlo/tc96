@@ -1,0 +1,88 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tc96-properties",
+  "homepage": "https://github.com/gblsmlo/properties#readme",
+  "items": [
+    {
+      "name": "properties",
+      "type": "registry:block",
+      "title": "Properties",
+      "description": "Domain-neutral property patterns for React applications.",
+      "files": [
+        {
+          "path": "src/components/properties/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/index.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/properties/lib/utils.ts"
+        },
+        {
+          "path": "src/components/properties/date/date-property.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/date/date-property.tsx"
+        },
+        {
+          "path": "src/components/properties/date/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/date/index.ts"
+        },
+        {
+          "path": "src/components/properties/person/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/person/index.ts"
+        },
+        {
+          "path": "src/components/properties/person/multi-person-property.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/person/multi-person-property.tsx"
+        },
+        {
+          "path": "src/components/properties/person/person-property.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/person/person-property.tsx"
+        },
+        {
+          "path": "src/components/properties/select/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/select/index.ts"
+        },
+        {
+          "path": "src/components/properties/select/select-property.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/select/select-property.tsx"
+        },
+        {
+          "path": "src/components/properties/string/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/string/index.ts"
+        },
+        {
+          "path": "src/components/properties/string/string-property.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/string/string-property.tsx"
+        },
+        {
+          "path": "src/components/properties/property-trigger.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/properties/property-trigger.tsx"
+        },
+        {
+          "path": "src/components/properties/types.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/properties/types.ts"
+        }
+      ],
+      "registryDependencies": [
+        "@coss/avatar",
+        "@coss/button",
+        "@coss/calendar",
+        "@coss/input",
+        "@coss/popover",
+        "@coss/select"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.group.json",
+  "compilerOptions": { "baseUrl": "./src/properties", "rootDir": "./src/properties", "outDir": "./dist/properties", "paths": { "@/*": ["*"] } },
+  "include": ["src/properties/**/*.ts", "src/properties/**/*.tsx"]
+}

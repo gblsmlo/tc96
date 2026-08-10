@@ -1,0 +1,85 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tc96-filter-builder",
+  "homepage": "https://github.com/gblsmlo/filter-builder#readme",
+  "items": [
+    {
+      "name": "filter-builder",
+      "type": "registry:block",
+      "title": "Filter Builder",
+      "description": "Domain-neutral filter builder pattern for React applications.",
+      "files": [
+        {
+          "path": "src/components/badge.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/badge.tsx"
+        },
+        {
+          "path": "src/components/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/button.tsx"
+        },
+        {
+          "path": "src/components/form.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/form.tsx"
+        },
+        {
+          "path": "src/components/group.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/group.tsx"
+        },
+        {
+          "path": "src/components/popover.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/popover.tsx"
+        },
+        {
+          "path": "src/components/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/select.tsx"
+        },
+        {
+          "path": "src/components/separator.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/separator.tsx"
+        },
+        {
+          "path": "src/components/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@components/patterns/filter-builder/components/spinner.tsx"
+        },
+        {
+          "path": "src/filter-builder/filter-builder.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/filter-builder/filter-builder/filter-builder.tsx"
+        },
+        {
+          "path": "src/filter-builder/filter-condition-row.tsx",
+          "type": "registry:component",
+          "target": "@components/patterns/filter-builder/filter-builder/filter-condition-row.tsx"
+        },
+        {
+          "path": "src/filter-builder/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/filter-builder/filter-builder/index.ts"
+        },
+        {
+          "path": "src/filter-builder/types.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/filter-builder/filter-builder/types.ts"
+        },
+        {
+          "path": "src/index.ts",
+          "type": "registry:component",
+          "target": "@components/patterns/filter-builder/index.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@components/patterns/filter-builder/lib/utils.ts"
+        }
+      ]
+    }
+  ]
+}
