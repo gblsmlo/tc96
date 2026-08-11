@@ -70,30 +70,72 @@ test('builds tc96/utils from the canonical source instead of a historical group'
 
 test('builds tc96/ui from canonical primitives', async () => {
   const canonicalUi = await Bun.file(join(packageRoot, 'src/ui/index.ts')).text()
+  const canonicalButton = await Bun.file(join(packageRoot, 'src/ui/button.tsx')).text()
   const buildPackage = await Bun.file(join(packageRoot, 'scripts/build-package.ts')).text()
 
   expect(canonicalUi).toContain("from './button'")
+  expect(canonicalUi).toContain('buttonSizes')
+  expect(canonicalUi).toContain('inputSizes')
+  expect(canonicalButton).not.toContain("variant: 'default'")
+  expect(canonicalButton).not.toMatch(/\n\s+default:\s*['"]/) 
+  expect(canonicalUi).toContain("from './field'")
+  expect(canonicalUi).toContain("from './form'")
+  expect(canonicalUi).toContain("from './group'")
   expect(canonicalUi).toContain("from './input'")
+  expect(canonicalUi).toContain("from './input-group'")
+  expect(canonicalUi).toContain("from './kbd'")
   expect(buildPackage).toContain("join(root, 'src/ui/button.tsx')")
+  expect(buildPackage).toContain('Button, buttonSizes, buttonVariants')
+  expect(buildPackage).toContain("join(root, 'src/ui/field.tsx')")
+  expect(buildPackage).toContain("join(root, 'src/ui/form.tsx')")
+  expect(buildPackage).toContain("join(root, 'src/ui/group.tsx')")
+  expect(buildPackage).toContain("join(root, 'src/ui/input-group.tsx')")
+  expect(buildPackage).toContain("join(root, 'src/ui/kbd.tsx')")
+  expect(buildPackage).toContain("naming: '[name].[ext]'")
   expect(buildPackage).not.toContain("ui: [\"export { Button, buttonVariants } from '../internal/view")
 })
 
-test('keeps Storybook as a consumer of public tc96 subpaths', async () => {
+test('keeps Storybook visual and makes Fumadocs the documentation authority', async () => {
   const storybookRoot = join(workspaceRoot, 'apps/storybook')
   const manifest = await readManifest(join(storybookRoot, 'package.json'))
-  const allowedImports = new Set(['tc96/ui', 'tc96/components', 'tc96/blocks', 'tc96/utils'])
+  const main = await Bun.file(join(storybookRoot, '.storybook/main.ts')).text()
+  const preview = await Bun.file(join(storybookRoot, '.storybook/preview.ts')).text()
+  const allowedImports = new Set(['tc96/ui', 'tc96/components', 'tc96/blocks'])
+  const allowedStoryLayers = new Set(['ui', 'components', 'blocks'])
   const sourceGlob = new Bun.Glob('**/*.{ts,tsx}')
+  const storyGlob = new Bun.Glob('**/*.stories.{ts,tsx}')
+  const mdxGlob = new Bun.Glob('**/*.mdx')
 
   expect(manifest.private).toBe(true)
+  expect(manifest).not.toHaveProperty('devDependencies.@storybook/addon-docs')
+  expect(main).not.toContain('@storybook/addon-docs')
+  expect(main).not.toContain('.mdx')
+  expect(main).not.toMatch(/\bdocs\s*:/)
+  expect(preview).not.toContain('autodocs')
+
+  for await (const mdxPath of mdxGlob.scan({ cwd: storybookRoot })) {
+    throw new Error(`Storybook must not contain documentation pages: ${mdxPath}`)
+  }
+
+  for await (const storyPath of storyGlob.scan({ cwd: join(storybookRoot, 'src') })) {
+    expect(allowedStoryLayers.has(storyPath.split('/')[0])).toBe(true)
+  }
 
   for await (const sourcePath of sourceGlob.scan({ cwd: join(storybookRoot, 'src') })) {
     const source = await Bun.file(join(storybookRoot, 'src', sourcePath)).text()
     const tc96Imports = source.matchAll(/from ["'](tc96(?:\/[^"']*)?)["']/g)
 
     expect(source).not.toContain('packages/tc96/src')
+    expect(source).not.toContain('tc96/utils')
+    expect(source).not.toContain('autodocs')
+    expect(source).not.toMatch(/title:\s*["']Utils(?:\/|["'])/)
 
     for (const match of tc96Imports) {
       expect(allowedImports.has(match[1])).toBe(true)
     }
   }
+
+  const docsMeta = await Bun.file(join(workspaceRoot, 'apps/docs/content/docs/meta.json')).text()
+  expect(docsMeta).toContain('"utils"')
+  expect(await Bun.file(join(workspaceRoot, 'apps/docs/content/docs/utils.mdx')).exists()).toBe(true)
 })

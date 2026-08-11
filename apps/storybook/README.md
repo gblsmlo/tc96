@@ -1,9 +1,10 @@
 # TC96 Storybook
 
-Aplicação interna que documenta e testa a API publicada do pacote. Stories desta
-pasta devem importar somente `tc96/ui`, `tc96/components`, `tc96/blocks` ou
-`tc96/utils`; imports diretos de `packages/tc96/src` quebrariam o papel desta
-aplicação como consumidor real.
+Catálogo visual interno para desenvolver e testar a API publicada do pacote.
+Stories desta pasta devem representar componentes renderizáveis e importar
+somente `tc96/ui`, `tc96/components` ou `tc96/blocks`. Utilitários sem interface,
+MDX, autodocs e documentação conceitual pertencem ao app Fumadocs em
+`apps/docs`; imports diretos de `packages/tc96/src` também não são permitidos.
 
 Na raiz do workspace:
 
@@ -15,3 +16,6 @@ bun run storybook:test
 
 `storybook:test` transforma as stories em testes Vitest e executa as interações
 em Chromium pelo Playwright.
+
+A suíte de arquitetura falha quando uma story é criada fora de `ui`,
+`components` ou `blocks`, importa `tc96/utils` ou reintroduz o addon de docs.

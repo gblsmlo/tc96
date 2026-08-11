@@ -8,6 +8,14 @@ const meta = {
   args: {
     'aria-label': 'Project name',
     placeholder: 'TC96 project',
+    size: 'md',
+    type: 'text',
+  },
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+    },
   },
 } satisfies Meta<typeof Input>
 

@@ -12,15 +12,16 @@ const meta = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'default', 'lg', 'xl'],
+      options: ['sm', 'md', 'lg'],
     },
     variant: {
       control: 'select',
       options: [
-        'default',
+        'primary',
         'secondary',
         'outline',
         'destructive',
+        'destructive-ghost',
         'destructive-outline',
         'ghost',
         'link',
@@ -32,7 +33,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const Primary: Story = {
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement)
     await userEvent.click(canvas.getByRole('button', { name: 'Continue' }))
@@ -44,12 +45,5 @@ export const Loading: Story = {
   args: {
     children: 'Saving',
     loading: true,
-  },
-}
-
-export const DestructiveOutline: Story = {
-  args: {
-    children: 'Remove',
-    variant: 'destructive-outline',
   },
 }

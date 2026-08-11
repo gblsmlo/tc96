@@ -6,8 +6,14 @@ const root = import.meta.dir + '/..'
 
 const publicModules = {
   ui: [
-    "export { Button, buttonVariants } from './button.js'",
-    "export { Input, InputPrimitive } from './input.js'",
+    "export { Button, buttonSizes, buttonVariants } from './button.js'",
+    "export { Field, FieldControl, FieldDescription, FieldError, FieldItem, FieldLabel, FieldPrimitive, FieldValidity } from './field.js'",
+    "export { Form, FormPrimitive } from './form.js'",
+    "export { Group, GroupSeparator, GroupText, groupVariants } from './group.js'",
+    "export { Input, InputPrimitive, inputSizes, inputVariants } from './input.js'",
+    "export { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from './input-group.js'",
+    "export { Kbd, KbdGroup } from './kbd.js'",
+    "export { Separator, SeparatorPrimitive } from './separator.js'",
     "export { Spinner } from './spinner.js'",
   ],
   components: [
@@ -72,10 +78,17 @@ for (const group of groups) {
 const uiResult = await Bun.build({
   entrypoints: [
     join(root, 'src/ui/button.tsx'),
+    join(root, 'src/ui/field.tsx'),
+    join(root, 'src/ui/form.tsx'),
+    join(root, 'src/ui/group.tsx'),
     join(root, 'src/ui/input.tsx'),
+    join(root, 'src/ui/input-group.tsx'),
+    join(root, 'src/ui/kbd.tsx'),
+    join(root, 'src/ui/separator.tsx'),
     join(root, 'src/ui/spinner.tsx'),
   ],
   format: 'esm',
+  naming: '[name].[ext]',
   outdir: join(root, 'dist/ui'),
   packages: 'external',
   target: 'browser',

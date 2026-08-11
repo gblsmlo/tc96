@@ -1,25 +1,45 @@
 'use client'
 
 import { Input as InputPrimitive } from '@base-ui/react/input'
+import { cva } from 'class-variance-authority'
 import type * as React from 'react'
 import { forwardRef } from 'react'
 import { cn } from '../utils'
+
+export const inputVariants = cva(
+  'w-full min-w-0 rounded-[inherit] outline-none [transition:background-color_5000000s_ease-in-out_0s] placeholder:text-muted-foreground/72',
+  {
+    defaultVariants: {
+      size: 'md',
+    },
+    variants: {
+      size: {
+        lg: 'h-10 px-[calc(--spacing(3.5)-1px)] leading-10',
+        md: 'h-9 px-[calc(--spacing(3)-1px)] leading-9',
+        sm: 'h-8 px-[calc(--spacing(2.5)-1px)] leading-8',
+      },
+    },
+  },
+)
+
+export const inputSizes = ['sm', 'md', 'lg'] as const
+export type InputSize = (typeof inputSizes)[number]
 
 export type InputProps = Omit<
   InputPrimitive.Props & React.RefAttributes<HTMLInputElement>,
   'size'
 > & {
-  size?: 'lg' | number
+  size?: InputSize
   unstyled?: boolean
   nativeInput?: boolean
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { className, size = 'lg', unstyled = false, nativeInput = false, style, ...props },
+  { className, size = 'md', unstyled = false, nativeInput = false, style, ...props },
   ref,
 ): React.ReactElement {
   const inputClassName = cn(
-    'h-9 w-full min-w-0 rounded-[inherit] px-[calc(--spacing(3)-1px)] leading-9 outline-none [transition:background-color_5000000s_ease-in-out_0s] placeholder:text-muted-foreground/72 sm:h-8 sm:leading-8',
+    inputVariants({ size }),
     props.type === 'search' &&
       '[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none',
     props.type === 'file' &&
@@ -35,7 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           className,
         ) || undefined
       }
-      data-size={typeof size === 'string' ? size : undefined}
+      data-size={size}
       data-slot="input-control"
     >
       {nativeInput ? (
@@ -43,7 +63,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           className={inputClassName}
           data-slot="input"
           ref={ref}
-          size={typeof size === 'number' ? size : undefined}
           style={typeof style === 'function' ? undefined : style}
           {...props}
         />
@@ -52,7 +71,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           className={inputClassName}
           data-slot="input"
           ref={ref}
-          size={typeof size === 'number' ? size : undefined}
           style={style}
           {...props}
         />

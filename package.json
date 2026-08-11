@@ -6,7 +6,7 @@
   "scripts": {
     "build": "bun run --filter tc96 build",
     "check": "bun run --filter tc96 lint:ci && bun run --filter @tc96/storybook lint:ci && bun run --filter tc96 typecheck && bun run --filter tc96 test && bun run --filter tc96 build && bun run --filter tc96 verify:public-api && bun run --filter @tc96/storybook typecheck && bun run --filter @tc96/storybook test && bun run --filter @tc96/storybook build && bun run --filter @tc96/docs build",
-    "release:check": "bun run check && bun --cwd=/Users/gabs/Workspaces/c/gabriel-melo/tc96/tc96/packages/tc96 run pack:check",
+    "release:check": "bun run check && bun --cwd=packages/tc96 run pack:check",
     "docs:dev": "bun run --filter @tc96/docs dev",
     "docs:build": "bun run --filter @tc96/docs build",
     "storybook": "bun run --filter tc96 build && bun run --filter @tc96/storybook dev",

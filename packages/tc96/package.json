@@ -28,7 +28,7 @@
   "scripts": {
     "build": "bun scripts/build-registry.ts && bun scripts/build-package.ts && tsc -p tsconfig.view.json && tsc -p tsconfig.properties.json && tsc -p tsconfig.datagrid.json && tsc -p tsconfig.detail-sheet.json && tsc -p tsconfig.editable.json && tsc -p tsconfig.filter-builder.json && tsc -p tsconfig.utils.json && tsc -p tsconfig.ui.json && bun scripts/rewrite-declarations.ts",
     "lint:ci": "biome ci tests scripts",
-    "pack:check": "npm pack --dry-run --json --cache /private/tmp/tc96-npm-cache",
+    "pack:check": "npm pack --dry-run --json",
     "verify:public-api": "bun test ./scripts/verify-public-api.ts",
     "test": "bun scripts/build-registry.ts && bun scripts/test.ts",
     "test:consumer": "bun run build && bun scripts/test-consumer.ts",

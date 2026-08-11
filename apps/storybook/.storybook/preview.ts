@@ -14,7 +14,7 @@ const preview: Preview = {
     },
     layout: 'centered',
   },
-  tags: ['autodocs', 'test'],
+  tags: ['test'],
 }
 
 export default preview
