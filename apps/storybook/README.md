@@ -19,3 +19,15 @@ em Chromium pelo Playwright.
 
 A suíte de arquitetura falha quando uma story é criada fora de `ui`,
 `components` ou `blocks`, importa `tc96/utils` ou reintroduz o addon de docs.
+
+O catálogo segue a mesma responsabilidade dos subpaths públicos:
+
+```text
+UI
+Components/Properties
+Blocks/Views
+```
+
+Dentro de `Blocks/Views`, Kanban e List compartilham a infraestrutura de
+Collection; DataGrid permanece uma view independente. Gallery, Timeline e
+Calendar aparecem como planned para reservar sua posição sem antecipar APIs.

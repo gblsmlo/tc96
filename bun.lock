@@ -25,6 +25,7 @@
       "name": "@tc96/storybook",
       "dependencies": {
         "@base-ui/react": "1.6.0",
+        "@dnd-kit/dom": "0.5.0",
         "lucide-react": "1.28.0",
         "react": "19.1.1",
         "react-dom": "19.1.1",
