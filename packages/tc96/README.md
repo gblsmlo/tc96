@@ -12,13 +12,13 @@ blocos e utilitários em subpaths explícitos.
 ```tsx
 import { Kanban } from 'tc96/blocks'
 import { SelectProperty } from 'tc96/components'
-import { Button, Input } from 'tc96/ui'
+import { Button, Input, Text } from 'tc96/ui'
 import { cn } from 'tc96/utils'
 ```
 
 | Subpath | Conteúdo |
 | --- | --- |
-| `tc96/ui` | `Button`, `Input`, `Spinner` e primitives canônicas |
+| `tc96/ui` | `Button`, `Input`, `Text`, `Spinner` e primitives canônicas |
 | `tc96/components` | Properties, Editable e composições reutilizáveis |
 | `tc96/blocks` | Kanban, List, DataGrid, Detail Sheet e Filter Builder |
 | `tc96/utils` | Utilitários sem domínio, incluindo `cn` |

@@ -40,7 +40,7 @@ do pacote — estes imports ainda não devem ser copiados para produção.
 
 | Camada | Import | Responsabilidade |
 | --- | --- | --- |
-| `ui` | `tc96/ui` | Primitives visuais como `Button`, `Input` e `Spinner` |
+| `ui` | `tc96/ui` | Primitives visuais como `Button`, `Input`, `Text` e `Spinner` |
 | `components` | `tc96/components` | Composições reutilizáveis como Properties e Editable |
 | `blocks` | `tc96/blocks` | Seções completas como Kanban, List, DataGrid, Detail Sheet e Filter Builder |
 | `utils` | `tc96/utils` | Utilitários sem React ou semântica de produto, como `cn` |
@@ -48,7 +48,7 @@ do pacote — estes imports ainda não devem ser copiados para produção.
 ```tsx
 import { Kanban } from 'tc96/blocks'
 import { SelectProperty } from 'tc96/components'
-import { Button, Input } from 'tc96/ui'
+import { Button, Input, Text } from 'tc96/ui'
 import { cn } from 'tc96/utils'
 ```
 

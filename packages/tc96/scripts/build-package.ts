@@ -15,6 +15,7 @@ const publicModules = {
     "export { Kbd, KbdGroup } from './kbd.js'",
     "export { Separator, SeparatorPrimitive } from './separator.js'",
     "export { Spinner } from './spinner.js'",
+    "export { Text, textSizes, textVariants } from './text.js'",
   ],
   components: [
     "export * from '../internal/properties/index.js'",
@@ -86,6 +87,7 @@ const uiResult = await Bun.build({
     join(root, 'src/ui/kbd.tsx'),
     join(root, 'src/ui/separator.tsx'),
     join(root, 'src/ui/spinner.tsx'),
+    join(root, 'src/ui/text.tsx'),
   ],
   format: 'esm',
   naming: '[name].[ext]',

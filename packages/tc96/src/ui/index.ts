@@ -29,3 +29,4 @@ export { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from './
 export { Kbd, KbdGroup } from './kbd'
 export { Separator, SeparatorPrimitive } from './separator'
 export { Spinner } from './spinner'
+export { Text, type TextProps, type TextSize, textSizes, textVariants } from './text'

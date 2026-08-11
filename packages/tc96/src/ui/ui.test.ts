@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import { buttonSizes, buttonVariants } from './button'
 import { inputSizes, inputVariants } from './input'
+import { textSizes, textVariants } from './text'
 
 describe('canonical ui', () => {
   test('keeps the preferred compact button contract', () => {
@@ -61,5 +62,13 @@ describe('canonical ui', () => {
 
     expect(inputSource).toContain('border border-input')
     expect(buttonVariants({ variant: 'outline' })).toContain('border-input')
+  })
+
+  test('adapts Text to the canonical size and semantic color contracts', () => {
+    expect(textSizes).toEqual(['sm', 'md', 'lg'])
+    expect(textVariants()).toContain('text-base')
+    expect(textVariants()).toContain('text-foreground')
+    expect(textVariants({ foreground: 'muted', size: 'sm' })).toContain('text-muted-foreground')
+    expect(textVariants({ foreground: 'muted', size: 'sm' })).toContain('text-sm')
   })
 })

@@ -16,6 +16,8 @@ test('loads the four documented public modules', () => {
   expect(ui.InputGroup).toBeDefined()
   expect(ui.Kbd).toBeDefined()
   expect(ui.Separator).toBeDefined()
+  expect(ui.Text).toBeDefined()
+  expect(ui.textSizes).toEqual(['sm', 'md', 'lg'])
   expect(components.SelectProperty).toBeDefined()
   expect(components.Editable).toBeDefined()
   expect(blocks.Kanban).toBeDefined()
