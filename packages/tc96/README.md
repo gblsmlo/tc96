@@ -57,8 +57,8 @@ bun run docs:dev
 bun run release:check
 ```
 
-Veja a [documentação principal](../../README.md), o
-[plano de migração](../../docs/plan/structural-migration.md) e o
+Veja a [documentação principal](../../README.md), a
+[estrutura feature-based](../../docs/plan/structural-migration.md) e o
 [exemplo validado de composição](./examples/utils/status-pill.tsx).
 
 ## Licença

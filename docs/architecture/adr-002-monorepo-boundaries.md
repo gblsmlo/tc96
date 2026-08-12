@@ -53,11 +53,11 @@ blocks ────────> components ────────> ui
 
 - O pipeline do repositório valida mais de uma aplicação.
 - Uma alteração pode bloquear a release única do pacote.
-- Durante a migração, os grupos históricos permanecem internos e podem conter
-  primitives duplicadas.
+- Adapters COSS locais a uma feature podem duplicar primitives compartilhadas
+  quando isso for necessário para manter o payload autocontido.
 
-Esses custos são mitigados por migração incremental, testes de fronteira e
-builds separados por workspace.
+Esses custos são mitigados por testes de fronteira, features coesas e builds
+separados por workspace.
 
 ## Gatilhos para reconsiderar
 

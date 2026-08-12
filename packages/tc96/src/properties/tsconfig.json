@@ -1,9 +1,0 @@
-{
-  "extends": "../../tsconfig.group.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "noEmit": true,
-    "paths": { "@/*": ["*"] }
-  },
-  "include": ["**/*.ts", "**/*.tsx"]
-}

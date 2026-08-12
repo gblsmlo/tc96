@@ -1,5 +1,0 @@
-{
-  "extends": "./tsconfig.group.json",
-  "compilerOptions": { "rootDir": "./src", "outDir": "./dist" },
-  "include": ["src/ui/**/*.ts", "src/ui/**/*.tsx"]
-}

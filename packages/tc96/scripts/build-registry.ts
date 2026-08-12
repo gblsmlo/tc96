@@ -2,11 +2,18 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { buildRegistryGraph, type RegistrySourceFile } from './registry-graph'
 
-const groups = ['view', 'properties', 'datagrid', 'detail-sheet', 'editable', 'filter-builder'] as const
+const registrySources = {
+  view: 'features/collection-views',
+  properties: 'features/properties',
+  datagrid: 'features/data-grid',
+  'detail-sheet': 'features/detail-sheet',
+  editable: 'features/editable',
+  'filter-builder': 'features/filter-builder',
+} as const
 const root = import.meta.dir + '/..'
 const output = join(root, 'registry/generated')
 
-type RegistryFile = Omit<RegistrySourceFile, 'path'> & { path: string }
+type RegistryFile = RegistrySourceFile
 type RegistryItem = {
   files?: RegistryFile[]
   meta?: Record<string, unknown>
@@ -18,22 +25,22 @@ type Registry = { items: RegistryItem[]; [key: string]: unknown }
 await rm(output, { force: true, recursive: true })
 await mkdir(output, { recursive: true })
 
-for (const group of groups) {
+for (const [group, sourceDirectory] of Object.entries(registrySources)) {
   const source = join(root, `registry/${group}.json`)
   const registry = JSON.parse(await readFile(source, 'utf8')) as Registry
   if (registry.items.length === 0) throw new Error(`Registry ${group} does not contain an item.`)
 
   const items = await Promise.all(
     registry.items.map(async (item) => {
-      const sourceFiles = (item.files ?? []).map((file) => ({
+      const sourceFiles: RegistrySourceFile[] = (item.files ?? []).map((file) => ({
         ...file,
-        path: `src/${group}/${file.path.replace(/^src\//, '')}`,
+        path: `src/${sourceDirectory}/${file.path.replace(/^src\//, '')}`,
       }))
       const files = await buildRegistryGraph({
         files: sourceFiles,
         packageRoot: root,
         registryDependencies: item.registryDependencies,
-        sourceRoot: `src/${group}`,
+        sourceRoot: `src/${sourceDirectory}`,
       })
 
       return { ...item, files, meta: { ...item.meta, package: 'tc96' } }
@@ -62,4 +69,6 @@ for (const group of groups) {
   )
 }
 
-console.log(`Generated ${groups.length} self-contained TC96 COSS registry entries.`)
+console.log(
+  `Generated ${Object.keys(registrySources).length} self-contained TC96 COSS registry entries.`,
+)

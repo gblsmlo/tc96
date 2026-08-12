@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tsconfig.group.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "../../../dist/internal/properties",
+    "paths": { "@/*": ["*"] },
+    "rootDir": "."
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}

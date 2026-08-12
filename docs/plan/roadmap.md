@@ -9,14 +9,16 @@
 - [x] Normalizar os manifests de registry COSS para o pacote consolidado.
 - [x] Instalar dependências e corrigir incompatibilidades reais da consolidação.
 
-## 2. Migração estrutural — em andamento
+## 2. Migração estrutural — concluída
 
 - [x] Definir o monorepo com uma única unidade de publicação.
 - [x] Registrar as regras entre `ui`, `components`, `blocks` e `utils`.
 - [x] Criar guardas de workspaces, subpaths e registry.
 - [x] Tornar o registry capaz de resolver dependências compartilhadas e publicar
   payloads autocontidos.
-- [ ] Migrar os grupos históricos para as quatro camadas canônicas.
+- [x] Organizar fontes por feature e manter as quatro camadas como fachadas públicas.
+- [x] Colocar primitives e utilitários canônicos em `shared`.
+- [x] Colocar build, tipos, testes e registry sob as mesmas fronteiras de feature.
 
 ## 3. Sistema base
 

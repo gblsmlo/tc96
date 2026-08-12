@@ -1,5 +1,0 @@
-{
-  "extends": "./tsconfig.group.json",
-  "compilerOptions": { "baseUrl": "./src/view", "rootDir": "./src/view", "outDir": "./dist/internal/view", "paths": { "@/*": ["*"] } },
-  "include": ["src/view/**/*.ts", "src/view/**/*.tsx"]
-}

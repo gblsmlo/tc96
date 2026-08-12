@@ -150,7 +150,10 @@ apps/
   docs/          documentação Fumadocs
   storybook/     catálogo visual e testes de interação
 packages/
-  tc96/          única unidade pública de distribuição
+  tc96/
+    src/features/ implementação organizada por feature
+    src/shared/   primitives e utilitários compartilhados
+    src/{ui,components,blocks,utils}/ fachadas da API pública
 docs/
   architecture/ decisões arquiteturais
   plan/          roadmap e migração incremental
@@ -163,16 +166,17 @@ de integração.
 
 ## Princípios para contribuição
 
-1. Preserve os limites entre `ui`, `components`, `blocks` e `utils`.
+1. Preserve as features como unidades de implementação e as camadas públicas
+   como fachadas de exportação.
 2. Não introduza regras de negócio ou vocabulário específico de um produto.
 3. Atualize implementação, tipos, testes, stories, documentação e registry no
    mesmo conjunto de mudanças.
 4. Garanta que toda entrada COSS continue autocontida.
 5. Execute `bun run release:check` antes de propor uma release.
 
-Antes de mover código entre camadas, consulte o
-[plano de migração estrutural](./docs/plan/structural-migration.md) e as
-[decisões arquiteturais](./docs/architecture/adr-001-single-package-and-explicit-subpaths.md).
+Antes de mover código entre features, consulte a
+[estrutura feature-based](./docs/plan/structural-migration.md) e as
+[decisões arquiteturais](./docs/architecture/adr-003-feature-based-source-boundaries.md).
 
 ## Licença
 

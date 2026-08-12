@@ -1,5 +1,0 @@
-{
-  "extends": "./tsconfig.group.json",
-  "compilerOptions": { "baseUrl": "./src/filter-builder", "rootDir": "./src/filter-builder", "outDir": "./dist/internal/filter-builder", "paths": { "@/*": ["*"] } },
-  "include": ["src/filter-builder/**/*.ts", "src/filter-builder/**/*.tsx"]
-}

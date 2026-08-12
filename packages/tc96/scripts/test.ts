@@ -16,12 +16,12 @@ async function runTests(cwd: string, paths: string[]) {
 
 await runTests(root, [
   'tests',
-  'src/view',
-  'src/datagrid',
-  'src/detail-sheet',
-  'src/editable',
-  'src/filter-builder',
-  'src/utils',
-  'src/ui',
+  'src/features/collection-views',
+  'src/features/data-grid',
+  'src/features/detail-sheet',
+  'src/features/editable',
+  'src/features/filter-builder',
+  'src/shared/utils',
+  'src/shared/ui',
 ])
-await runTests(join(root, 'src/properties'), ['.'])
+await runTests(join(root, 'src/features/properties'), ['.'])

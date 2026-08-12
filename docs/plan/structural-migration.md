@@ -1,98 +1,66 @@
-# Plano de migração estrutural
+# Migração estrutural feature-based
+
+## Estado
+
+Concluída.
 
 ## Objetivo
 
-Chegar à estrutura `ui`, `components`, `blocks` e `utils` como fonte canônica do
-pacote sem interromper os imports da versão 0.1.0 nem produzir entradas COSS
-incompletas.
+Organizar a implementação pela unidade que muda em conjunto, sem transformar as
+camadas públicas em pastas horizontais de implementação. `ui`, `components`,
+`blocks` e `utils` continuam sendo o contrato do pacote; features e módulos
+compartilhados passam a ser a fonte canônica.
 
-## Estado alvo
+## Estrutura canônica
 
 ```text
-apps/
-  docs/
-  storybook/
-packages/tc96/
-  src/
+packages/tc96/src/
+  features/
+    collection-views/
+    data-grid/
+    detail-sheet/
+    editable/
+    filter-builder/
+    properties/
+  shared/
     ui/
-    components/
-    blocks/
     utils/
-  registry/
-  scripts/
-tests/
-  e2e/
+  blocks/index.ts
+  components/index.ts
+  ui/index.ts
+  utils/index.ts
 ```
 
-## Mapa inicial
+`collection`, `kanban` e `list` pertencem à feature `collection-views`. O outlet
+de collection compõe Kanban e List, enquanto List reutiliza os tipos e a projeção
+de Collection; separá-los em features independentes criaria dependências
+circulares artificiais.
 
-| Origem atual | Destino | Camada pública |
+## Contrato público
+
+| Fonte | Fachada | Subpath |
 | --- | --- | --- |
-| `src/view/kanban` | `src/blocks/kanban` | `tc96/blocks` |
-| `src/view/list` | `src/blocks/list` | `tc96/blocks` |
-| `src/view/collection` | `src/components/collection` | `tc96/components` |
-| `src/datagrid/data-grid` | `src/blocks/data-grid` | `tc96/blocks` |
-| `src/detail-sheet/components/detail-sheet` | `src/blocks/detail-sheet` | `tc96/blocks` |
-| `src/filter-builder/filter-builder` | `src/blocks/filter-builder` | `tc96/blocks` |
-| `src/properties/components/properties` | `src/components/properties` | `tc96/components` |
-| `src/editable/components/editable` | `src/components/editable` | `tc96/components` |
-| primitives duplicadas em cada grupo | `src/ui` | `tc96/ui` |
-| `lib/utils.ts` duplicados | `src/utils` | `tc96/utils` |
+| `shared/ui` | `src/ui/index.ts` | `tc96/ui` |
+| `shared/utils` | `src/utils/index.ts` | `tc96/utils` |
+| `features/properties` e `features/editable` | `src/components/index.ts` | `tc96/components` |
+| demais features | `src/blocks/index.ts` | `tc96/blocks` |
 
-## Etapas
+As fachadas apenas reexportam. Features não importam essas fachadas, evitando
+ciclos entre implementação e API pública.
 
-### 0. Contratos e guardas
+## Registry COSS
 
-- [x] Registrar a unidade única de publicação e as regras de dependência.
-- [x] Mapear os grupos atuais para as camadas de destino.
-- [x] Proteger workspaces, exports públicos e entradas de registry com teste.
+Os nomes `view`, `properties`, `datagrid`, `detail-sheet`, `editable` e
+`filter-builder` foram preservados como chaves de compatibilidade do registry.
+O gerador resolve cada chave para sua fonte em `src/features` e continua
+produzindo payloads autocontidos.
 
-### 1. Registry antes da movimentação
+## Guardas
 
-- [x] Fazer o gerador resolver dependências compartilhadas de cada item.
-- [x] Incorporar `content` no JSON publicado e reescrever imports locais de
-  acordo com os `target` de instalação.
-- [x] Validar que todos os imports `@/` presentes em um item têm arquivo ou
-  dependência correspondente.
-- [x] Executar todos os testes portados como parte do gate `bun test`.
-- [x] Adicionar teste de instalação COSS em um projeto Vite temporário usando o
-  tarball real e os seis `registry-item.json` publicados.
-
-O gerador percorre imports e exports transitivamente a partir dos arquivos de
-entrada. Imports de primitives `@/components/ui/*` permanecem externos somente
-quando o item declara o respectivo `@coss/*`; os demais imports locais são
-incluídos no payload. A movimentação para as camadas canônicas só começa depois
-desse contrato permanecer verde.
-
-### 2. Camadas canônicas
-
-- [x] Migrar `utils` para uma fonte pública canônica sem alterar `tc96/utils`.
-- [x] Migrar `Button`, `Input` e `Spinner` para `ui` sem alterar a API pública.
-- [ ] Migrar as demais primitives de `ui` sem alterar a API pública.
-- [ ] Migrar `properties`, `editable` e `collection` para `components`.
-- [ ] Migrar Kanban, List, DataGrid, Detail Sheet e Filter Builder para `blocks`.
-- [ ] Remover os grupos históricos após o registry deixar de depender deles.
-
-`src/utils/index.ts` já é a fonte do subpath npm. Os `lib/utils.ts` históricos
-permanecem temporariamente como payloads de compatibilidade do registry COSS e
-serão removidos junto de cada grupo, evitando quebrar instalações durante a
-migração incremental.
-
-### 3. Aplicações consumidoras
-
-- [x] Criar `apps/storybook` consumindo apenas os subpaths públicos.
-- [ ] Fazer Fumadocs importar exemplos pelos subpaths públicos.
-- [ ] Adicionar Playwright somente para drag-and-drop, teclado, overlays, scroll
-  e demais fluxos que exigem navegador real.
-
-### 4. Release
-
-- [ ] Instalar o tarball em um consumidor Vite mínimo.
-- [ ] Validar lint, tipos, unitários, Storybook, docs, Playwright e npm pack.
-- [ ] Remover compatibilidade estrutural temporária e publicar a versão definida.
-
-## Critério de conclusão por migração
-
-Uma unidade só sai do grupo histórico quando código, exports, testes, stories,
-documentação e manifestos COSS forem atualizados juntos e o `release:check`
-permanecer verde.
+- cada feature possui seu próprio `tsconfig.json` e saída interna;
+- não existem fontes nos antigos diretórios horizontais;
+- as quatro fachadas públicas são verificadas por teste arquitetural;
+- os seis payloads COSS resolvem imports locais de forma transitiva;
+- Storybook e Fumadocs consomem somente os subpaths públicos;
+- o teste de consumidor instala o tarball e os seis itens do registry em um
+  projeto Vite temporário.

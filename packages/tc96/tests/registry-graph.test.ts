@@ -58,18 +58,18 @@ describe('self-contained COSS registry', () => {
     const files = await buildRegistryGraph({
       files: [
         {
-          path: 'src/view/index.ts',
+          path: 'src/features/collection-views/index.ts',
           target: '@components/patterns/collection-views/index.ts',
           type: 'registry:component',
         },
       ],
       packageRoot: root,
       registryDependencies: registry.items[0]?.registryDependencies,
-      sourceRoot: 'src/view',
+      sourceRoot: 'src/features/collection-views',
     })
 
     expect(files.length).toBeGreaterThan(20)
-    expect(files.some((file) => file.path === 'src/view/lib/utils.ts')).toBeTrue()
-    expect(files.some((file) => file.path === 'src/view/kanban/types.ts')).toBeTrue()
+    expect(files.some((file) => file.path === 'src/features/collection-views/lib/utils.ts')).toBeTrue()
+    expect(files.some((file) => file.path === 'src/features/collection-views/kanban/types.ts')).toBeTrue()
   })
 })

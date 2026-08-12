@@ -1,0 +1,8 @@
+{
+  "extends": "../../../tsconfig.group.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/utils",
+    "rootDir": "."
+  },
+  "include": ["**/*.ts"]
+}

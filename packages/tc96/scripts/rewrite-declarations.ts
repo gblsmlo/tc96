@@ -10,9 +10,9 @@ const publicModules = {
     "export * from '../internal/editable/index'",
   ],
   blocks: [
-    "export { KanbanView as Kanban } from '../internal/view/index'",
-    "export * from '../internal/view/index'",
-    "export * from '../internal/datagrid/index'",
+    "export { KanbanView as Kanban } from '../internal/collection-views/index'",
+    "export * from '../internal/collection-views/index'",
+    "export * from '../internal/data-grid/index'",
     "export * from '../internal/detail-sheet/index'",
     "export * from '../internal/filter-builder/index'",
   ],
